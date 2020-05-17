@@ -1,0 +1,27 @@
+Departures:
+1
+elal
+1 2 2020
+13 45
+vwe44
+3
+England
+London
+
+arrivals:
+2
+elal
+3 6 2019
+3 4
+ce43
+2
+France
+paris
+
+ee
+23 8 2020
+12 23
+dd34
+2
+china
+beigin

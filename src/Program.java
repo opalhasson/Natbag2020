@@ -15,13 +15,18 @@ public class Program {
 			System.out.println("3)To Show the list of departures");// from Israel
 			System.out.println("4)To Show the list of the arrivals"); // to Israel
 			System.out.println("5)Save the details of all flights into a file");
-			System.out.println("6)Load the details of all flight from a file ");
+			System.out.println("6)Load the details of all flights from a file ");
+			System.out.println("7)Search by Dates");
+			
 			choice = scan.nextInt();
 			switch (choice) {
 			case 1:
-				System.out.printf("Enter the destination: ");
+				System.out.print("Enter the destination country: ");
 				String destination = scan.next();
-
+				
+				System.out.print("Enter the destination city: ");
+				String dCity = scan.next();
+				
 				System.out.println("Enter the flight Company: ");
 				String company = scan.next();
 
@@ -44,13 +49,16 @@ public class Program {
 				int terminal = scan.nextInt();
 
 				DepartureFlight oF = new DepartureFlight(company, destination, date, hour, flightNumber, terminal,
-						minute);
+						minute,dCity);
 				afeka.addTakingOffFlight(oF);
 
 				break;
 			case 2:
-				System.out.printf("Enter the income country: ");
+				System.out.println("Enter the income country: ");
 				String incomeCountry = scan.next();
+				
+				System.out.println("Enter the income city: ");
+				String incomeCity = scan.next();
 				
 				System.out.println("Enter the flight Company: ");
 				String Company = scan.next();
@@ -73,7 +81,7 @@ public class Program {
 				System.out.println("Enter the terminal:");
 				int terminale = scan.nextInt();
 
-				ArrivalFlight iF = new ArrivalFlight(Company, datee, h, flightNum, terminale, incomeCountry, minutee);
+				ArrivalFlight iF = new ArrivalFlight(Company, datee, h, flightNum, terminale, incomeCountry, minutee,incomeCity);
 				afeka.addLandingFlight(iF);
 
 				break;
@@ -91,14 +99,17 @@ public class Program {
 				Scanner s = new Scanner(file);
 				afeka = new Airport(s);
 				break;
-
+			case 7:
+				System.out.println("From which Date you want to search:");
+				Date from = new Date(scan.nextInt(),scan.nextInt(),scan.nextInt());
+				System.out.println("Until which Date you want to search:");
+				Date until = new Date(scan.nextInt(),scan.nextInt(),scan.nextInt());
+		
+				System.out.println(afeka.searchByDate(from,until));
 			}
-		} while (choice != 7);
+		} while (choice != 8);
 
 	}
-
-	public void createFlight() {
-
-	}
+	
 
 }
