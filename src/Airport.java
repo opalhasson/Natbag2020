@@ -1,14 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
-
 public class Airport {
+
 	private int numOfFlight = 0;
 	private List<DepartureFlight> listOfTakingOffFlights;
 	private List<ArrivalFlight> listOfLandingFlights;
@@ -42,28 +33,12 @@ public class Airport {
 	public String showAllTakingOffFlight() {
 		Comparator<DepartureFlight> compareByDateAndHour = new Comparator<DepartureFlight>() {
 			public int compare(DepartureFlight f1, DepartureFlight f2) {
-				if (f1.getFlightDate().getYear() < f2.getFlightDate().getYear()) {
+				if (f1.getFlightDate().isBefore(f2.getFlightDate()))
 					return -1;
-				} else if (f1.getFlightDate().getYear() == f2.getFlightDate().getYear()) {
-					if (f1.getFlightDate().getMonth() < f2.getFlightDate().getMonth()) {
-						return -1;
-					} else if (f1.getFlightDate().getMonth() == f2.getFlightDate().getMonth()) {
-						if (f1.getFlightDate().getDay() < f2.getFlightDate().getDay()) {
-							return -1;
-						} else if (f1.getFlightDate().getDay() == f2.getFlightDate().getDay()) {
-							if (f1.getHour() < f2.getHour()) {
-								return -1;
-							} else if (f1.getHour() == f2.getHour()) {
-								if (f1.getMinute() < f2.getMinute()) {
-									return -1;
-								} else if (f1.getMinute() == f2.getMinute()) {
-									return 0;
-								}
-							}
-						}
-					}
-				}
-				return 1;
+				else if (f1.getFlightDate().isEqual(f2.getFlightDate()))
+					return 0;
+				else
+					return 1;
 			}
 		};
 		Collections.sort(listOfTakingOffFlights, compareByDateAndHour);
@@ -73,28 +48,12 @@ public class Airport {
 	public String showAllLandingFlight() {
 		Comparator<ArrivalFlight> compareByDateAndHour = new Comparator<ArrivalFlight>() {
 			public int compare(ArrivalFlight f1, ArrivalFlight f2) {
-				if (f1.getFlightDate().getYear() < f2.getFlightDate().getYear()) {
+				if (f1.getFlightDate().isBefore(f2.getFlightDate()))
 					return -1;
-				} else if (f1.getFlightDate().getYear() == f2.getFlightDate().getYear()) {
-					if (f1.getFlightDate().getMonth() < f2.getFlightDate().getMonth()) {
-						return -1;
-					} else if (f1.getFlightDate().getMonth() == f2.getFlightDate().getMonth()) {
-						if (f1.getFlightDate().getDay() < f2.getFlightDate().getDay()) {
-							return -1;
-						} else if (f1.getFlightDate().getDay() == f2.getFlightDate().getDay()) {
-							if (f1.getHour() < f2.getHour()) {
-								return -1;
-							} else if (f1.getHour() == f2.getHour()) {
-								if (f1.getMinute() < f2.getMinute()) {
-									return -1;
-								} else if (f1.getMinute() == f2.getMinute()) {
-									return 0;
-								}
-							}
-						}
-					}
-				}
-				return 1;
+				else if (f1.getFlightDate().isEqual(f2.getFlightDate()))
+					return 0;
+				else
+					return 1;
 			}
 		};
 		Collections.sort(listOfLandingFlights, compareByDateAndHour);
@@ -116,7 +75,7 @@ public class Airport {
 		pw.close();
 	}
 
-	public Airport(Scanner s) throws FileNotFoundException {
+	public Airport(Scanner s) throws FileNotFoundException { // loading elements from the file
 		this();
 		s.next();
 		int numofd = s.nextInt();
@@ -134,98 +93,23 @@ public class Airport {
 		return "Arrivals: " + listOfLandingFlights + "\nDepartures: " + listOfTakingOffFlights;
 	}
 
-	public String searchByDate(Date from, Date until) {
-		StringBuffer flights = new StringBuffer("The Departure flights between the Dates are:\n");
-		for (int i = 0; i < listOfTakingOffFlights.size(); i++) {
-			int year = listOfTakingOffFlights.get(i).getFlightDate().getYear();
-			int month = listOfTakingOffFlights.get(i).getFlightDate().getMonth();
-			int day = listOfTakingOffFlights.get(i).getFlightDate().getDay();
-			boolean isOk = false;
-			if (year >= from.getYear()) {
-				if (year == from.getYear()) {
-					if (month >= from.getMonth()) {
-						if (month == from.getMonth()) {
-							if (day >= from.getDay()) {
-								isOk = true;
-							}
-						}
-						else {
-							isOk = true;
-						}
-					}
-				}
-				else {
-					isOk= true;
-				}
-			}
-			if (isOk) {
-				isOk = false;
-				if (year <= until.getYear()) {
-					if (year == until.getYear()) {
-						if (month <= until.getMonth()) {
-							if (month == until.getMonth()) {
-								if (day <= until.getDay()) {
-									isOk = true;
-								}
-							} else {
-								isOk = true;
-							}
-						}
-					} else {
-						isOk = true;
-					}
-				} 
-			}
-			if (isOk) {
-				flights.append(listOfTakingOffFlights.get(i)+"\n");
-			}
-		}
-		flights.append("The Arrival flights between the Dates are:\n");
+	public String searchByDate(LocalDate from, LocalDate until) {
+		StringBuffer flights = new StringBuffer("The Arrival flights between the Dates are:\n");
 		for (int i = 0; i < listOfLandingFlights.size(); i++) {
-				int year = listOfLandingFlights.get(i).getFlightDate().getYear();
-				int month = listOfLandingFlights.get(i).getFlightDate().getMonth();
-				int day = listOfLandingFlights.get(i).getFlightDate().getDay();
-				boolean isOk = false;
-				if (year >= from.getYear()) {
-					if (year == from.getYear()) {
-						if (month >= from.getMonth()) {
-							if (month == from.getMonth()) {
-								if (day >= from.getDay()) {
-									isOk = true;
-								}
-							}
-							else {
-								isOk = true;
-							}
-						}
-					}
-					else {
-						isOk= true;
-					}
-				}
-				if (isOk) {
-					isOk = false;
-					if (year <= until.getYear()) {
-						if (year == until.getYear()) {
-							if (month <= until.getMonth()) {
-								if (month == until.getMonth()) {
-									if (day <= until.getDay()) {
-										isOk = true;
-									}
-								} else {
-									isOk = true;
-								}
-							}
-						} else {
-							isOk = true;
-						}
-					} 
-				}
-				if (isOk) {
-					flights.append(listOfLandingFlights.get(i)+"\n");
-				}
+			if ((listOfLandingFlights.get(i).getFlightDate().isAfter(from)
+					|| listOfLandingFlights.get(i).getFlightDate().isEqual(from))
+					&& listOfLandingFlights.get(i).getFlightDate().isBefore(until))
+				flights.append(listOfLandingFlights.get(i) + "\n");
+		}
+
+		flights.append("The Departure flights between the Dates are:\n");
+		for (int i = 0; i < listOfTakingOffFlights.size(); i++) {
+			if ((listOfTakingOffFlights.get(i).getFlightDate().isAfter(from)
+					|| listOfTakingOffFlights.get(i).getFlightDate().isEqual(from))
+					&& listOfTakingOffFlights.get(i).getFlightDate().isBefore(until))
+				flights.append(listOfTakingOffFlights.get(i) + "\n");
 		}
 		return flights.toString();
-		
 	}
+
 }
