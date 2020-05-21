@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Program {
@@ -7,6 +8,7 @@ public class Program {
 	public static void main(String[] args) throws IOException {
 		Scanner scan = new Scanner(System.in);
 		Airport afeka = new Airport();
+		int day, month, year;
 
 		int choice;
 		do {
@@ -31,11 +33,11 @@ public class Program {
 				String company = scan.next();
 
 				System.out.println("Enter the date of your flight: ");
-				int day, month, year;
+				
 				day = scan.nextInt();
 				month = scan.nextInt();
 				year = scan.nextInt();
-				Date date = new Date(day, month, year);
+				LocalDate date = LocalDate.of(year, month, day);
 
 				System.out.println("Enter the hour: ");
 				int hour = scan.nextInt();
@@ -48,8 +50,7 @@ public class Program {
 				System.out.println("Enter the terminal:");
 				int terminal = scan.nextInt();
 
-				DepartureFlight oF = new DepartureFlight(company, destination, date, hour, flightNumber, terminal,
-						minute,dCity);
+				DepartureFlight oF = new DepartureFlight(company, destination, date, hour, flightNumber, terminal,minute,dCity);
 				afeka.addTakingOffFlight(oF);
 
 				break;
@@ -64,11 +65,11 @@ public class Program {
 				String Company = scan.next();
 
 				System.out.println("Enter the date of your flight: ");
-				int d, m, y;
-				d = scan.nextInt();
-				m = scan.nextInt();
-				y = scan.nextInt();
-				Date datee = new Date(d, m, y);
+				
+				day = scan.nextInt();
+				month = scan.nextInt();
+				year = scan.nextInt();
+				LocalDate datee = LocalDate.of(year, month, day);
 
 				System.out.println("Enter the hour:");
 				int h = scan.nextInt();
@@ -101,15 +102,21 @@ public class Program {
 				break;
 			case 7:
 				System.out.println("From which Date you want to search:");
-				Date from = new Date(scan.nextInt(),scan.nextInt(),scan.nextInt());
+				
+				day = scan.nextInt();
+				month = scan.nextInt();
+				year = scan.nextInt();
+				LocalDate from = LocalDate.of(year, month, day);
 				System.out.println("Until which Date you want to search:");
-				Date until = new Date(scan.nextInt(),scan.nextInt(),scan.nextInt());
+				day = scan.nextInt();
+				month = scan.nextInt();
+				year = scan.nextInt();
+				LocalDate until = LocalDate.of(year, month, day);
 		
 				System.out.println(afeka.searchByDate(from,until));
 			}
 		} while (choice != 8);
 
 	}
-	
 
 }
