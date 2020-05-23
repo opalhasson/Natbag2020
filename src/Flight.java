@@ -15,7 +15,7 @@ public class Flight {
 
 	public Flight(String company, LocalDate flightDate, int h, String flightNumber, int terminal, int minute) {
 		this.company = company;
-		dateCheck(flightDate);
+		this.flightDate=flightDate;
 		setHour(h);
 		this.flightNumber = flightNumber;
 		this.terminal = terminal;
