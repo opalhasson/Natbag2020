@@ -1,7 +1,10 @@
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Scanner;
+
+
 
 public class Program {
 
@@ -33,12 +36,18 @@ public class Program {
 				String company = scan.next();
 
 				System.out.println("Enter the date of your flight: ");
-				
-				day = scan.nextInt();
-				month = scan.nextInt();
-				year = scan.nextInt();
-				LocalDate date = LocalDate.of(year, month, day);
-
+				boolean checkInput=false;
+				LocalDate date = null;
+				while(!checkInput){
+					try {
+						date=LocalDate.of(scan.nextInt(), scan.nextInt(), scan.nextInt());
+						if(date.isAfter(LocalDate.now())) {
+							checkInput=true;
+						}else throw new FilghtExcption("Invalid date");
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+				}
+				}
 				System.out.println("Enter the hour: ");
 				int hour = scan.nextInt();
 				System.out.println("Enter the minute: ");
@@ -65,11 +74,18 @@ public class Program {
 				String Company = scan.next();
 
 				System.out.println("Enter the date of your flight: ");
-				
-				day = scan.nextInt();
-				month = scan.nextInt();
-				year = scan.nextInt();
-				LocalDate datee = LocalDate.of(year, month, day);
+				boolean checkInput=false;
+				LocalDate date = null;
+				while(!checkInput){
+					try {
+						date=LocalDate.of(scan.nextInt(), scan.nextInt(), scan.nextInt());
+						if(date.isAfter(LocalDate.now())) {
+							checkInput=true;
+						}else throw new FilghtExcption("Invalid date");
+					}catch(Exception e) {
+						System.out.println(e.getMessage());
+				}
+				}
 
 				System.out.println("Enter the hour:");
 				int h = scan.nextInt();
