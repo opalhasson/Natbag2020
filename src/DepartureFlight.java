@@ -16,6 +16,14 @@ public class DepartureFlight extends Flight {
 
 	}
 
+	public String getDestCountry() {
+		return destCountry;
+	}
+
+	public String getDestCity() {
+		return destCity;
+	}
+	
 	public void save(PrintWriter pw) {
 		pw.println(company);
 		pw.println(flightDate.format(DateTimeFormatter.ofPattern("d MM uuuu")) );

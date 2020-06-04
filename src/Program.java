@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Scanner;
 
-
-
 public class Program {
 
 	public static void main(String[] args) throws IOException {
@@ -21,32 +19,33 @@ public class Program {
 			System.out.println("4)To Show the list of the arrivals"); // to Israel
 			System.out.println("5)Save the details of all flights into a file");
 			System.out.println("6)Load the details of all flights from a file ");
-			System.out.println("7)Search by Dates");
-			
+			System.out.println("7)Search by Certain Fields");
+
 			choice = scan.nextInt();
 			switch (choice) {
 			case 1:
 				System.out.print("Enter the destination country: ");
 				String destination = scan.next();
-				
+
 				System.out.print("Enter the destination city: ");
 				String dCity = scan.next();
-				
+
 				System.out.println("Enter the flight Company: ");
 				String company = scan.next();
 
-				System.out.println("Enter the date of your flight: ");
-				boolean checkInput=false;
+				System.out.println("Enter the date of your flight (YYYY,MM,DD): ");
+				boolean checkInput = false;
 				LocalDate date = null;
-				while(!checkInput){
+				while (!checkInput) {
 					try {
-						date=LocalDate.of(scan.nextInt(), scan.nextInt(), scan.nextInt());
-						if(date.isAfter(LocalDate.now())) {
-							checkInput=true;
-						}else throw new FilghtExcption("Invalid date");
-					}catch(Exception e) {
+						date = LocalDate.of(scan.nextInt(), scan.nextInt(), scan.nextInt());
+						if (date.isAfter(LocalDate.now())) {
+							checkInput = true;
+						} else
+							throw new FilghtExcption("Invalid date");
+					} catch (Exception e) {
 						System.out.println(e.getMessage());
-				}
+					}
 				}
 				System.out.println("Enter the hour: ");
 				int hour = scan.nextInt();
@@ -59,22 +58,23 @@ public class Program {
 				System.out.println("Enter the terminal:");
 				int terminal = scan.nextInt();
 
-				DepartureFlight oF = new DepartureFlight(company, destination, date, hour, flightNumber, terminal,minute,dCity);
+				DepartureFlight oF = new DepartureFlight(company, destination, date, hour, flightNumber, terminal,
+						minute, dCity);
 				afeka.addTakingOffFlight(oF);
 
 				break;
 			case 2:
 				System.out.println("Enter the income country: ");
 				String incomeCountry = scan.next();
-				
+
 				System.out.println("Enter the income city: ");
 				String incomeCity = scan.next();
-				
+
 				System.out.println("Enter the flight Company: ");
 				String Company = scan.next();
 
-				System.out.println("Enter the date of your flight: ");
-				
+				System.out.println("Enter the date of your flight (YYYY,MM,DD): ");
+
 				day = scan.nextInt();
 				month = scan.nextInt();
 				year = scan.nextInt();
@@ -91,7 +91,8 @@ public class Program {
 				System.out.println("Enter the terminal:");
 				int terminale = scan.nextInt();
 
-				ArrivalFlight iF = new ArrivalFlight(Company, datee, h, flightNum, terminale, incomeCountry, minutee,incomeCity);
+				ArrivalFlight iF = new ArrivalFlight(Company, datee, h, flightNum, terminale, incomeCountry, minutee,
+						incomeCity);
 				afeka.addLandingFlight(iF);
 
 				break;
@@ -110,8 +111,11 @@ public class Program {
 				afeka = new Airport(s);
 				break;
 			case 7:
-				System.out.println("From which Date you want to search:");
+				System.out.println("which type do you want to search:");
+				char type = scan.next().charAt(0);
 				
+				System.out.println("From which Date you want to search:");
+
 				day = scan.nextInt();
 				month = scan.nextInt();
 				year = scan.nextInt();
@@ -121,8 +125,20 @@ public class Program {
 				month = scan.nextInt();
 				year = scan.nextInt();
 				LocalDate until = LocalDate.of(year, month, day);
-		
-				System.out.println(afeka.searchByDate(from,until));
+				
+				
+				System.out.println("which country do you want to search:");
+				scan.nextLine();
+				String country = scan.next();
+				
+				System.out.println("which city do you want to search:");
+				scan.nextLine();
+				String city = scan.next();
+				
+				System.out.println("which company do you want to search:");
+				scan.nextLine();
+				String companyS = scan.next();
+				System.out.println(afeka.search(type,from, until, country, city, companyS));
 			}
 		} while (choice != 8);
 

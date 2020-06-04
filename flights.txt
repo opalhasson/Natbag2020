@@ -1,27 +1,44 @@
 Departures:
-1
+3
 elal
-1 2 2020
+1 02 2020
 13 45
 vwe44
 3
 England
 London
 
+aeroflot
+31 12 2020
+12 5
+LYL787
+3
+Russia
+Moscow
+
+aeroflot
+12 11 2020
+13 5
+LYL437
+3
+Japan
+Tokyo
+
 arrivals:
 2
 elal
-3 6 2019
+3 06 2019
 3 4
 ce43
 2
 France
 paris
 
-ee
-23 8 2020
+elal
+23 08 2020
 12 23
-dd34
+LYL343
 2
 china
 beigin
+

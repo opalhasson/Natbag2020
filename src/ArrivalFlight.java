@@ -15,6 +15,14 @@ public class ArrivalFlight extends Flight {
 		this.incomeCity= city;
 	}
 
+	public String getIncomeCountry() {
+		return incomeCountry;
+	}
+
+	public String getIncomeCity() {
+		return incomeCity;
+	}
+	
 	public void save(PrintWriter pw) {
 		 pw.println(company);
 		 pw.println(flightDate.format(DateTimeFormatter.ofPattern("d MM uuuu")) );
