@@ -33,40 +33,6 @@ public class Flight {
 		this.flightNumber = s.next();
 		this.terminal = s.nextInt();
 	}
-	
-	private void dateCheck(LocalDate d) {
-		Scanner s=new Scanner(System.in);
-		do {
-			try {
-				if(d.getMonthValue()==1||d.getMonthValue()==3||d.getMonthValue()==5||d.getMonthValue()==7||d.getMonthValue()==8||d.getMonthValue()==10||d.getMonthValue()==12) {
-					if(d.getDayOfMonth()>=1 &&d.getDayOfMonth()<=31) {
-						this.flightDate= d;
-						dateOk=true;
-					}
-				}
-				if(d.getMonthValue()==4||d.getMonthValue()==6||d.getMonthValue()==9||d.getMonthValue()==11) {
-					if(d.getDayOfMonth()>=1 &&d.getDayOfMonth()<=30) {
-						this.flightDate=d;
-						dateOk=true;
-					}
-				}
-				else {
-					if(d.getMonthValue()==2 &&(d.getDayOfMonth()>=1 &&d.getDayOfMonth()<=28)) {
-						this.flightDate=d;
-						dateOk=true;
-					}
-				}
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				dateOk=false;
-				System.out.println("Enter anthor date");
-				int day=s.nextInt();
-				int month=s.nextInt();
-				int year=s.nextInt();
-				d =LocalDate.of(year,month, day);
-			}
-		}while(!dateOk);	
-	}
 
 	public LocalDate getFlightDate() {
 		return flightDate;
