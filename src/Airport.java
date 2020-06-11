@@ -104,15 +104,15 @@ public class Airport {
 
 	public List<Flight> filterByDate(LocalDate from,LocalDate until, List<Flight> flights) {
 		List<Flight> temp = new ArrayList<>();
-		for (int i = 0; i < listOfLandingFlights.size(); i++) {
-			if((listOfLandingFlights.get(i).getFlightDate().isAfter(from)||listOfLandingFlights.get(i).getFlightDate().isEqual(from))&&listOfLandingFlights.get(i).getFlightDate().isBefore(until))
-				temp.add(listOfLandingFlights.get(i));
+		for (int i = 0; i < flights.size(); i++) {
+			if((flights.get(i).getFlightDate().isAfter(from)||flights.get(i).getFlightDate().isEqual(from))&&flights.get(i).getFlightDate().isBefore(until))
+				temp.add(flights.get(i));
 		}
 
-		for (int i = 0; i < listOfTakingOffFlights.size(); i++) {
-			if((listOfTakingOffFlights.get(i).getFlightDate().isAfter(from)||listOfTakingOffFlights.get(i).getFlightDate().isEqual(from))&&listOfTakingOffFlights.get(i).getFlightDate().isBefore(until))
-				temp.add(listOfTakingOffFlights.get(i));
-		}
+//		for (int i = 0; i < listOfTakingOffFlights.size(); i++) {
+//			if((listOfTakingOffFlights.get(i).getFlightDate().isAfter(from)||listOfTakingOffFlights.get(i).getFlightDate().isEqual(from))&&listOfTakingOffFlights.get(i).getFlightDate().isBefore(until))
+//				temp.add(listOfTakingOffFlights.get(i));
+//		}
 		return temp;
 	}
 	
@@ -121,7 +121,7 @@ public class Airport {
 		for (int i = 0; i < flights.size(); i++) {
 			if (flights.get(i) instanceof ArrivalFlight) {
 				if (((ArrivalFlight) flights.get(i)).getIncomeCountry().equalsIgnoreCase(country)) {
-					temp.add(listOfLandingFlights.get(i));
+					temp.add(flights.get(i));
 				}
 			}
 			
@@ -141,7 +141,7 @@ public class Airport {
 		for (int i = 0; i < flights.size(); i++) {
 			if (flights.get(i) instanceof ArrivalFlight) {
 				if (((ArrivalFlight) flights.get(i)).getIncomeCity().equalsIgnoreCase(city)) {
-					temp.add(listOfLandingFlights.get(i));
+					temp.add(flights.get(i));
 				}
 			}
 			
@@ -165,9 +165,9 @@ public class Airport {
 		return temp;
 	}
 	
-	public void filterByDorA(char type, List<Flight> flights) {
-		if (type != 'b' && type != 'B') {
-			if (type == 'a' || type == 'A') {
+	public void filterByDorA(String type, List<Flight> flights) {
+		if (!(type.equalsIgnoreCase("b"))) {
+			if (type.equalsIgnoreCase("a")) {
 				for (int i = 0; i < listOfLandingFlights.size(); i++) {
 					flights.add(listOfLandingFlights.get(i));
 				}
@@ -183,7 +183,19 @@ public class Airport {
 		}
 	}
 	
-	public String search(char type,LocalDate from,LocalDate until,String country,String city,String company) {
+	public List<Flight> search(String type,LocalDate from,LocalDate until,String country,String city,String company) {
+		//StringBuffer result = new StringBuffer("the Filtered list is:<br>");
+		List<Flight> flights = new ArrayList<>();
+		filterByDorA(type,flights);
+		flights = filterByDate(from, until,flights);
+		flights = filterByCountry(country,flights);
+		flights = filterByCity(city,flights);
+		flights = filterByCompany(company,flights);
+		//result.append(flights.toString());
+		return flights;
+	}
+	
+	public String searchConsole(String type,LocalDate from,LocalDate until,String country,String city,String company) {
 		StringBuffer result = new StringBuffer("the Filtered list is:\n");
 		List<Flight> flights = new ArrayList<>();
 		filterByDorA(type,flights);
