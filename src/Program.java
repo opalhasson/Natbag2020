@@ -9,8 +9,7 @@ public class Program {
 	public static void main(String[] args) throws IOException {
 		Scanner scan = new Scanner(System.in);
 		Airport afeka = new Airport();
-		int day, month, year;
-
+		int day,month,year;
 		int choice;
 		do {
 			System.out.println("1)Add Departure flight ");
@@ -112,21 +111,41 @@ public class Program {
 				break;
 			case 7:
 				System.out.println("which type do you want to search:");
-				char type = scan.next().charAt(0);
+				String type = scan.next();
 				
 				System.out.println("From which Date you want to search:");
+				checkInput = false;
+				LocalDate from = null;
+				while (!checkInput) {
+					try {
+						from = LocalDate.of(scan.nextInt(), scan.nextInt(), scan.nextInt());
+						if (from.isAfter(LocalDate.now())) {
+							checkInput = true;
+						} else
+							throw new FilghtExcption("Invalid date");
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+						scan.nextLine();
+					}
+				}
 
-				day = scan.nextInt();
-				month = scan.nextInt();
-				year = scan.nextInt();
-				LocalDate from = LocalDate.of(year, month, day);
+				
 				System.out.println("Until which Date you want to search:");
-				day = scan.nextInt();
-				month = scan.nextInt();
-				year = scan.nextInt();
-				LocalDate until = LocalDate.of(year, month, day);
-				
-				
+				checkInput = false;
+				LocalDate until = null;
+				while (!checkInput) {
+					try {
+						until = LocalDate.of(scan.nextInt(), scan.nextInt(), scan.nextInt());
+						if (until.isAfter(LocalDate.now())) {
+							checkInput = true;
+						} else
+							throw new FilghtExcption("Invalid date");
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+						scan.nextLine();
+					}
+					
+				}
 				System.out.println("which country do you want to search:");
 				scan.nextLine();
 				String country = scan.next();
@@ -137,8 +156,8 @@ public class Program {
 				
 				System.out.println("which company do you want to search:");
 				scan.nextLine();
-				String companyS = scan.next();
-				System.out.println(afeka.search(type,from, until, country, city, companyS));
+				String companyy = scan.next();
+				System.out.println(afeka.searchConsole(type,from, until,country,city,companyy));
 			}
 		} while (choice != 8);
 
