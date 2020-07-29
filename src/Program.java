@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Program {
@@ -29,6 +30,9 @@ public class Program {
 				System.out.print("Enter the destination city: ");
 				String dCity = scan.next();
 
+				System.out.println("Enter the airport: ");
+				String airport = scan.next();
+				
 				System.out.println("Enter the flight Company: ");
 				String company = scan.next();
 
@@ -58,7 +62,7 @@ public class Program {
 				int terminal = scan.nextInt();
 
 				DepartureFlight oF = new DepartureFlight(company, destination, date, hour, flightNumber, terminal,
-						minute, dCity);
+						minute, dCity,airport);
 				afeka.addTakingOffFlight(oF);
 
 				break;
@@ -68,6 +72,9 @@ public class Program {
 
 				System.out.println("Enter the income city: ");
 				String incomeCity = scan.next();
+				
+				System.out.println("Enter the airport: ");
+				String Airport = scan.next();
 
 				System.out.println("Enter the flight Company: ");
 				String Company = scan.next();
@@ -91,7 +98,7 @@ public class Program {
 				int terminale = scan.nextInt();
 
 				ArrivalFlight iF = new ArrivalFlight(Company, datee, h, flightNum, terminale, incomeCountry, minutee,
-						incomeCity);
+						incomeCity,Airport);
 				afeka.addLandingFlight(iF);
 
 				break;
@@ -146,6 +153,45 @@ public class Program {
 					}
 					
 				}
+				
+				ArrayList<String> days = new ArrayList<>();
+				System.out.println("which days do you want to search:");
+				System.out.println("Sunday:");
+				boolean sunday = scan.nextBoolean();
+				if (sunday) {
+					days.add("sunday");
+				}
+				System.out.println("Monday:");
+				boolean monday = scan.nextBoolean();
+				if (monday) {
+					days.add("monday");
+				}
+				System.out.println("Tuesday:");
+				boolean tuesday = scan.nextBoolean();
+				if (tuesday) {
+					days.add("tuesday");
+				}
+				System.out.println("Wednesday:");
+				boolean wednesday = scan.nextBoolean();
+				if (wednesday) {
+					days.add("wednesday");
+				}
+				System.out.println("Thursday:");
+				boolean thursday = scan.nextBoolean();
+				if (thursday) {
+					days.add("thursday");
+				}
+				System.out.println("Friday:");
+				boolean friday = scan.nextBoolean();
+				if (friday) {
+					days.add("friday");
+				}
+				System.out.println("Saturday:");
+				boolean saturday = scan.nextBoolean();
+				if (saturday) {
+					days.add("saturday");
+				}
+				
 				System.out.println("which country do you want to search:");
 				scan.nextLine();
 				String country = scan.next();
@@ -157,7 +203,12 @@ public class Program {
 				System.out.println("which company do you want to search:");
 				scan.nextLine();
 				String companyy = scan.next();
-				System.out.println(afeka.searchConsole(type,from, until,country,city,companyy));
+				
+				System.out.println("which airport do you want to search:");
+				scan.nextLine();
+				String airportt = scan.next();
+				
+				System.out.println(afeka.searchConsole(type,from, until,country,city,companyy,airportt,days));
 			}
 		} while (choice != 8);
 

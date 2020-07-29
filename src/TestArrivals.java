@@ -20,11 +20,11 @@ class TestArrivals {
 	
 	public Airport createAirport() {
 		Airport testAirport = new Airport();
-		testAirport.addLandingFlight(new ArrivalFlight("elal",LocalDate.of(2020,2,13),15,"LY234",3,"France",34,"Paris"));
-		testAirport.addLandingFlight(new ArrivalFlight("easyJet",LocalDate.of(2020,5,24),12,"LY736",3,"UK",23,"London"));
-		testAirport.addLandingFlight(new ArrivalFlight("elal",LocalDate.of(2021,1,7),3,"LY112",3,"Japan",10,"Tokyo"));
-		testAirport.addLandingFlight(new ArrivalFlight("Swiss",LocalDate.of(2019,10,17),23,"LY935",3,"Switzerland",12,"Zurich"));
-		testAirport.addLandingFlight(new ArrivalFlight("aeroflot",LocalDate.of(2021,8,23),6,"LY246",3,"Russia",55,"Moscow"));
+		testAirport.addLandingFlight(new ArrivalFlight("elal",LocalDate.of(2020,2,13),15,"LY234",3,"France",34,"Paris","PDG"));
+		testAirport.addLandingFlight(new ArrivalFlight("easyJet",LocalDate.of(2020,5,24),12,"LY736",3,"UK",23,"London","heathrow"));
+		testAirport.addLandingFlight(new ArrivalFlight("elal",LocalDate.of(2021,1,7),3,"LY112",3,"Japan",10,"Tokyo","narita"));
+		testAirport.addLandingFlight(new ArrivalFlight("Swiss",LocalDate.of(2019,10,17),23,"LY935",3,"Switzerland",12,"Zurich","zurich airport"));
+		testAirport.addLandingFlight(new ArrivalFlight("aeroflot",LocalDate.of(2021,8,23),6,"LY246",3,"Russia",55,"Moscow","SVO"));
 		return testAirport; 
 	}
 	

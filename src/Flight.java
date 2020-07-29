@@ -8,13 +8,15 @@ public class Flight {
 	protected LocalDate flightDate;
 	protected String company;
 	protected String flightNumber;
+	protected String airport;
 	protected int terminal;
 	protected int hour;
 	protected int minute;
 	protected boolean dateOk=true;
 
-	public Flight(String company, LocalDate flightDate, int h, String flightNumber, int terminal, int minute) {
+	public Flight(String company, LocalDate flightDate, int h, String flightNumber, int terminal, int minute,String airport) {
 		this.company = company;
+		this.airport = airport;
 		this.flightDate=flightDate;
 		setHour(h);
 		this.flightNumber = flightNumber;
@@ -24,6 +26,7 @@ public class Flight {
 	
 	public Flight(Scanner s) {
 		this.company = s.next();
+		this.airport = s.next();
 		int day=s.nextInt();
 		int month=s.nextInt();
 		int year=s.nextInt();
@@ -42,6 +45,10 @@ public class Flight {
 		return company;
 	}
 
+	public String getAirport() {
+		return airport;
+	}
+	
 	public String getFlightNumber() {
 		return flightNumber;
 	}

@@ -9,8 +9,8 @@ public class DepartureFlight extends Flight {
 
 
 	public DepartureFlight(String company, String destination, LocalDate flightDate, int h, String flightNumber,
-			int terminal, int minute, String city) {
-		super(company, flightDate, h, flightNumber, terminal, minute);
+			int terminal, int minute, String city,String airport) {
+		super(company, flightDate, h, flightNumber, terminal, minute, airport);
 		this.destCountry = destination;
 		this.destCity = city;
 
@@ -26,6 +26,7 @@ public class DepartureFlight extends Flight {
 	
 	public void save(PrintWriter pw) {
 		pw.println(company);
+		pw.println(airport);
 		pw.println(flightDate.format(DateTimeFormatter.ofPattern("d MM uuuu")) );
 		pw.println(hour + " " + minute);
 		pw.println(flightNumber);
