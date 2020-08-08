@@ -1,6 +1,7 @@
 Departures:
 3
 elal
+heathrow
 1 02 2020
 13 45
 vwe44
@@ -9,14 +10,7 @@ England
 London
 
 aeroflot
-31 12 2020
-12 5
-LYL787
-3
-Russia
-Moscow
-
-aeroflot
+narita
 12 11 2020
 13 5
 LYL437
@@ -24,21 +18,32 @@ LYL437
 Japan
 Tokyo
 
+aeroflot
+SVO
+31 12 2020
+12 5
+LYL787
+3
+Russia
+Moscow
+
 arrivals:
 2
 elal
-3 06 2019
+PDG
+21 06 2020
 3 4
 ce43
-2
+3
 France
 paris
 
 elal
+PEK
 23 08 2020
 12 23
 LYL343
 2
 china
-beigin
+beijing
 

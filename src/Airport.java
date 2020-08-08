@@ -52,7 +52,11 @@ public class Airport {
 			}
 		};
 		Collections.sort(listOfTakingOffFlights, compareByDateAndHour);
-		return "The flight sorted by date are: " + listOfTakingOffFlights;
+		StringBuffer list = new StringBuffer();
+		for (int i = 1; i <= listOfTakingOffFlights.size(); i++) {
+			list.append(i + ") " + listOfTakingOffFlights.get(i - 1).toString());
+		}
+		return "The Departure flights sorted by date are: \n" + list;
 	}
 
 	public String showAllLandingFlight() {
@@ -67,11 +71,14 @@ public class Airport {
 			}
 		};
 		Collections.sort(listOfLandingFlights, compareByDateAndHour);
-		return "The flight sorted by date are: " + listOfLandingFlights;
+		StringBuffer list = new StringBuffer();
+		for (int i = 1; i <= listOfLandingFlights.size(); i++) {
+			list.append(i + ") " + listOfLandingFlights.get(i - 1).toString());
+		}
+		return "The Arrival flights sorted by date are: \n" + list;
 	}
 
-	public void save() throws IOException {
-		File file = new File("flights.txt");
+	public void save(File file) throws IOException {
 		file.createNewFile();
 		PrintWriter pw = new PrintWriter(file);
 		pw.println("Departures:\n" + listOfTakingOffFlights.size());
@@ -111,10 +118,6 @@ public class Airport {
 				temp.add(flights.get(i));
 		}
 
-//		for (int i = 0; i < listOfTakingOffFlights.size(); i++) {
-//			if((listOfTakingOffFlights.get(i).getFlightDate().isAfter(from)||listOfTakingOffFlights.get(i).getFlightDate().isEqual(from))&&listOfTakingOffFlights.get(i).getFlightDate().isBefore(until))
-//				temp.add(listOfTakingOffFlights.get(i));
-//		}
 		return temp;
 	}
 
@@ -222,7 +225,7 @@ public class Airport {
 
 	public String searchConsole(String type, LocalDate from, LocalDate until, String country, String city,
 			String company, String airport, List<String> days) {
-		StringBuffer result = new StringBuffer("the Filtered list is:\n");
+		StringBuffer result = new StringBuffer("The Filtered list is:\n");
 		List<Flight> flights = new ArrayList<>();
 		filterByDorA(type, flights);
 		flights = filterByDate(from, until, flights);

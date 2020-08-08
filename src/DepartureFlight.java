@@ -7,9 +7,8 @@ public class DepartureFlight extends Flight {
 	private String destCountry;
 	private String destCity;
 
-
 	public DepartureFlight(String company, String destination, LocalDate flightDate, int h, String flightNumber,
-			int terminal, int minute, String city,String airport) {
+			int terminal, int minute, String city, String airport) {
 		super(company, flightDate, h, flightNumber, terminal, minute, airport);
 		this.destCountry = destination;
 		this.destCity = city;
@@ -23,11 +22,11 @@ public class DepartureFlight extends Flight {
 	public String getDestCity() {
 		return destCity;
 	}
-	
+
 	public void save(PrintWriter pw) {
 		pw.println(company);
 		pw.println(airport);
-		pw.println(flightDate.format(DateTimeFormatter.ofPattern("d MM uuuu")) );
+		pw.println(flightDate.format(DateTimeFormatter.ofPattern("d MM uuuu")));
 		pw.println(hour + " " + minute);
 		pw.println(flightNumber);
 		pw.println(terminal);
@@ -43,7 +42,8 @@ public class DepartureFlight extends Flight {
 	}
 
 	public String toString() {
-		return super.toString() + "Departure Flight: [destination=" + destCountry + " destCity = " + destCity +"]";
+		return "Departure Flight: Destination Country= " + destCountry + ", Destination City= " + destCity
+				+ super.toString();
 	}
 
 }

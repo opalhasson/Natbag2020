@@ -12,25 +12,26 @@ public class Flight {
 	protected int terminal;
 	protected int hour;
 	protected int minute;
-	protected boolean dateOk=true;
+	protected boolean dateOk = true;
 
-	public Flight(String company, LocalDate flightDate, int h, String flightNumber, int terminal, int minute,String airport) {
+	public Flight(String company, LocalDate flightDate, int h, String flightNumber, int terminal, int minute,
+			String airport) {
 		this.company = company;
 		this.airport = airport;
-		this.flightDate=flightDate;
+		this.flightDate = flightDate;
 		setHour(h);
 		this.flightNumber = flightNumber;
 		this.terminal = terminal;
 		setMinute(minute);
 	}
-	
+
 	public Flight(Scanner s) {
 		this.company = s.next();
 		this.airport = s.next();
-		int day=s.nextInt();
-		int month=s.nextInt();
-		int year=s.nextInt();
-		flightDate =LocalDate.of(year,month, day);
+		int day = s.nextInt();
+		int month = s.nextInt();
+		int year = s.nextInt();
+		flightDate = LocalDate.of(year, month, day);
 		this.hour = s.nextInt();
 		this.minute = s.nextInt();
 		this.flightNumber = s.next();
@@ -48,7 +49,7 @@ public class Flight {
 	public String getAirport() {
 		return airport;
 	}
-	
+
 	public String getFlightNumber() {
 		return flightNumber;
 	}
@@ -64,26 +65,25 @@ public class Flight {
 	public int getMinute() {
 		return minute;
 	}
-	
+
 	public void setHour(int hour) {
-		if (hour <=23 && hour>=0) {
+		if (hour <= 23 && hour >= 0) {
 			this.hour = hour;
-		}
-		else
+		} else
 			this.hour = 12;
 	}
 
 	public void setMinute(int minute) {
-		if (minute <=59 && minute >= 0) {
+		if (minute <= 59 && minute >= 0) {
 			this.minute = minute;
-		}
-		else
+		} else
 			this.minute = 0;
 	}
-	
+
 	public String toString() {
-		return "\nFlight [flightDate=" + flightDate.format(DateTimeFormatter.ofPattern("d/MM/uuuu")) + ", company=" + company + ", flightNumber=" + flightNumber
-				+ ", terminal=" + terminal + ", Time=" + hour +":"+ minute + "]";
+		return ", Date=" + flightDate.format(DateTimeFormatter.ofPattern("d/MM/uuuu")) + ", Time=" + hour + ":" + minute
+				+ ", Airport=" + airport + ", Airline=" + company + ", Flight Number=" + flightNumber + ", Terminal="
+				+ terminal + "\n";
 	}
 
 }

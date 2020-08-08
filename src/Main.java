@@ -1,9 +1,7 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
 
@@ -11,7 +9,9 @@ public class Main {
 		boolean isHtml = args.length > 0 && args[0].equalsIgnoreCase("html");
 		Airport afeka = new Airport();
 		afeka.addTakingOffFlight(
-				new DepartureFlight("elal", "France", LocalDate.of(2020, 2, 13), 15, "LY234", 3, 34, "Paris", "PDG"));
+				new DepartureFlight("elal", "France", LocalDate.of(2020, 7, 29), 15, "LY234", 2, 34, "Paris", "CDG"));
+		afeka.addTakingOffFlight(
+				new DepartureFlight("elal", "France", LocalDate.of(2020, 6, 7), 12, "LY345", 3, 22, "Paris", "CDG"));
 		afeka.addTakingOffFlight(new DepartureFlight("easyJet", "UK", LocalDate.of(2020, 5, 24), 12, "LY736", 3, 23,
 				"London", "heathrow"));
 		afeka.addTakingOffFlight(
@@ -58,25 +58,35 @@ public class Main {
 			days.add("saturday");
 		}
 
-		List<Flight> flights = afeka.search(args[1], from, until, args[2], args[3], args[4], args[5], days);
-		html(flights, args[1]);
+		List<Flight> flights = afeka.search(args[1], from, until, args[2], args[3], args[5], args[4], days);
+		if (isHtml) {
+			html(flights, args[1]);
+		} else {
+			text(flights, args[1]);
+		}
+
 	}
 
 	public static void html(List<Flight> flights, String type) {
 		System.out.println("<style>" + "table, th, td {" + "  border: 2px solid black;" + "border-collapse: collapse;"
 				+ "text-align: center;" + "}" + "</style>");
+		if (type.equals("a")) {
+			System.out.println("<h1> Here are your requested arrival flights:</h1>");
+
+		} else {
+			System.out.println("<h1> Here are your requested departure flights:</h1>");
+		}
 		System.out.println("<table style=\"width:100%\">");
 		System.out.println("<tbody>");
 		System.out.println("<tr>");
-		System.out.println("<th>company</th>");
-		System.out.println("<th>flight number</th>");
-		System.out.println("<th>country</th>");
-		System.out.println("<th>city</th>");
-		System.out.println("<th>date and time</th>");
-		System.out.println("<th>terminal</th>");
+		System.out.println("<th>Airline</th>");
+		System.out.println("<th>Flight Number</th>");
+		System.out.println("<th>Country</th>");
+		System.out.println("<th>City</th>");
+		System.out.println("<th>Date & Time</th>");
+		System.out.println("<th>Terminal</th>");
 		System.out.println("</tr>");
 		for (int i = 0; i < flights.size(); i++) {
-			System.out.println("<h1> here are your requested flight:</h1>");
 			System.out.println("<tr>");
 			System.out.println("<td>" + flights.get(i).getCompany() + "</td>");
 			System.out.println("<td>" + flights.get(i).getFlightNumber() + "</td>");
@@ -95,5 +105,17 @@ public class Main {
 		}
 		System.out.println("</tbody>");
 		System.out.println("</table>");
+	}
+
+	public static void text(List<Flight> flights, String type) {
+		if (type.equals("a")) {
+			System.out.println("\nHere are your requested arrival flights:");
+
+		} else {
+			System.out.println("\nHere are your requested departure flights:");
+		}
+		for (int i = 0; i < flights.size(); i++) {
+			System.out.println(flights.get(i).toString());
+		}
 	}
 }

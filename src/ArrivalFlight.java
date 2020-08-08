@@ -9,10 +9,10 @@ public class ArrivalFlight extends Flight {
 	private String incomeCity;
 
 	public ArrivalFlight(String company, LocalDate flightDate, int h, String flightNumber, int terminal, String country,
-			int minute,String city,String airport) {
-		super(company, flightDate, h, flightNumber, terminal, minute,airport);
+			int minute, String city, String airport) {
+		super(company, flightDate, h, flightNumber, terminal, minute, airport);
 		this.incomeCountry = country;
-		this.incomeCity= city;
+		this.incomeCity = city;
 	}
 
 	public String getIncomeCountry() {
@@ -22,19 +22,19 @@ public class ArrivalFlight extends Flight {
 	public String getIncomeCity() {
 		return incomeCity;
 	}
-	
+
 	public void save(PrintWriter pw) {
-		 pw.println(company);
-		 pw.println(airport);
-		 pw.println(flightDate.format(DateTimeFormatter.ofPattern("d MM uuuu")) );
-		 pw.println(hour + " " + minute);
-		 pw.println(flightNumber);
-		 pw.println(terminal);
-		 pw.println(incomeCountry);
-		 pw.println(incomeCity);
-		 pw.println();
+		pw.println(company);
+		pw.println(airport);
+		pw.println(flightDate.format(DateTimeFormatter.ofPattern("d MM uuuu")));
+		pw.println(hour + " " + minute);
+		pw.println(flightNumber);
+		pw.println(terminal);
+		pw.println(incomeCountry);
+		pw.println(incomeCity);
+		pw.println();
 	}
-	
+
 	public ArrivalFlight(Scanner s) {
 		super(s);
 		this.incomeCountry = s.next();
@@ -42,7 +42,7 @@ public class ArrivalFlight extends Flight {
 	}
 
 	public String toString() {
-		return super.toString() + "Arrival Flight [incomeCountry=" + incomeCountry + " incomeCity =" +  incomeCity +"]";
+		return "Arrival Flight: Income Country= " + incomeCountry + ", Income City= " + incomeCity + super.toString();
 	}
 
 }
